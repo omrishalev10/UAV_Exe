@@ -3,8 +3,8 @@
 #include <sstream>
 #include <iomanip> // setprecision function
 
-CUav::CUav() : x(0), y(0), z(0), speed(0), azimuth(0), uavNumber(0), turningRadius(0), destination(0,0),
-        gotFirstCommand(false), gotNewCommand(false), speedX(0), speedY(0) {}
+CUav::CUav() : x(0), y(0), z(0), speed(0), azimuth(0), uavNumber(0), turningRadius(0), destination(0, 0),
+gotFirstCommand(false), gotNewCommand(false), speedX(0), speedY(0) {}
 
 void CUav::initialize(const UavParams& params) {
     this->uavNumber = params.uavNumber;
@@ -12,7 +12,8 @@ void CUav::initialize(const UavParams& params) {
     this->x = params.x0;
     this->y = params.y0;
     this->z = params.z0;
-    this->speed = params.speed0; 
+    this->speed = params.speed0;
+    this->azimuth = params.azimuth;
 }
 
 void CUav::executeCommand(const Command& cmd) {
@@ -20,22 +21,18 @@ void CUav::executeCommand(const Command& cmd) {
     if (cmd.uavNumber == uavNumber) {
         /* Set new destination */
         destination = make_pair(cmd.x, cmd.y);
-        if(gotFirstCommand) gotNewCommand = true;
+        if (!gotNewCommand) gotNewCommand = true;
     }
 }
 
 void CUav::update(double deltaTime) {
     /* Calculate new azimuth only if there was a new command */
-    if (!gotFirstCommand) {
-        calculateAzimuth();
-        calculateSpeedByAxis();
-        gotFirstCommand = true;
-    }
-    else if (gotNewCommand) {
+    if (gotNewCommand) {
         calculateAzimuth();
         calculateSpeedByAxis();
         gotNewCommand = false;
     }
+    calculateSpeedByAxis();
     moveUAV(deltaTime);
 }
 
@@ -50,6 +47,7 @@ void CUav::calculateAzimuth() {
     double deltaY = destination.second - y;
     /* Calculation of the azimuth in radians and turn into degrees */
     azimuth = atan2(deltaY, deltaX) * (180.0 / PI);
+    //azimuth = fmod(azimuth + 360, 360);
 }
 
 void CUav::calculateSpeedByAxis() {

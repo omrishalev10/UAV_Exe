@@ -35,10 +35,10 @@ private:
     double azimuth; // Current azimuth
     double turningRadius;
     pair<double, double> destination;
-    
+
     bool gotFirstCommand; // flag to sign when got new command to calculate new azimuth
     bool gotNewCommand; // flag to sign when got new command to calculate new azimuth
-
+    bool isCircling;
     /* Axis speed */
     double speedX, speedY;
 
