@@ -27,6 +27,7 @@ public:
     virtual void executeCommand(const Command& cmd) override;
     virtual void update(double deltaTime) override;
 
+
 private:
     int uavNumber;
     double x, y, z; // Current position
@@ -34,12 +35,16 @@ private:
     double azimuth; // Current azimuth
     double turningRadius;
     pair<double, double> destination;
-    bool isCircling;
-    bool GotCommand; // flag to sign when got new command to calculate new azimuth
+    
+    bool gotFirstCommand; // flag to sign when got new command to calculate new azimuth
+    bool gotNewCommand; // flag to sign when got new command to calculate new azimuth
 
+    /* Axis speed */
+    double speedX, speedY;
 
     void moveUAV(double deltaTime);
     void calculateAzimuth();
+    void calculateSpeedByAxis();
 
 public:
     /* Getters */

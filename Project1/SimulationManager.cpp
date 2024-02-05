@@ -1,9 +1,7 @@
 #include "SimulationManager.h"
-#include <chrono>
-#include <thread>
-#include <exception>
 #include <iostream>
-#include <iomanip>
+#include <sstream>
+#include <iomanip> // setprecision function
 
 SimulationManager::SimulationManager() {}
 
@@ -11,13 +9,22 @@ void SimulationManager::init(const CommandsSet& cmds, const ParsedData& params) 
     this->commands = cmds;
     this->simulationParams = params;
 
-    // Initialize UAVs based on ParsedData
+    /* Initialize UAVs based on ParsedData */
     for (int i = 0; i < params.m_number; ++i) {
         UavParams uavParams{ i + 1, params.m_radius, params.m_x0, params.m_y0, params.m_z0, params.m_speed0, params.m_azimuth };
         CUav uav;
         uav.initialize(uavParams);
         uavs.push_back(uav);
-    }
+
+        /* Create a file for each UAV */
+        ostringstream fileName;
+        fileName << "UAV" << i + 1 << ".txt";
+        auto handler = make_unique<CFileHandler>(); // Create a unique_ptr to CFileHandler
+        if (!handler->initHandler(fileName.str())) {
+            cerr << "Failed to initialize file handler for UAV" << (i + 1) << endl;
+        }
+        fileHandlers.emplace(i + 1, move(handler)); // Store the unique_ptr in the map
+     }
 }
 
 void SimulationManager::runSimulation() {
@@ -42,31 +49,17 @@ void SimulationManager::runSimulation() {
         for (auto& uav : uavs) {
             uav.update(Dt);
         }
-
-        // Optionally, log the state of each UAV at this timestep
-        cout << fixed << setprecision(2); // 2 digits after the point
-        cout << "Time: " << currentTime << " seconds" << endl;
+       
         for (auto& uav : uavs) {
-            cout << "UAV: " << uav.getUavNumber()
-                << ", X: " << uav.getX()
-                << ", Y: " << uav.getY()
-                << ", Azimuth: " << uav.getAzimuth()
-                << endl;
-        }
+            ostringstream data;
+            data << fixed << setprecision(2)
+                << "Time: " << currentTime << ", UAV: " << uav.getUavNumber()
+                << ", X: " << uav.getX() << ", Y: " << uav.getY()
+                << ", Azimuth: " << uav.getAzimuth() << endl;
 
+            // Write to the corresponding file
+            fileHandlers[uav.getUavNumber()]->writeHandler(data.str());
+        }
         currentTime += Dt; // Advance simulation time by Dt
     }
-
-    // Final log to confirm the end state of each UAV
-    cout << "Final UAV States:" << endl;
-    for (auto& uav : uavs) {
-        cout << "UAV: " << uav.getUavNumber()
-            << ", X: " << uav.getX()
-            << ", Y: " << uav.getY()
-            << ", Azimuth: " << uav.getAzimuth()
-            << endl;
-    }
 }
-
-
-

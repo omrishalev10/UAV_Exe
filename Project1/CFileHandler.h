@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CFILEHANDLER_H
 #define CFILEHANDLER_H
 
@@ -13,6 +15,7 @@ private:
 
 public:
     CFileHandler();
+    CFileHandler(CFileHandler&& other);
     virtual ~CFileHandler();
 
     virtual bool initHandler(const string& fileName) override;

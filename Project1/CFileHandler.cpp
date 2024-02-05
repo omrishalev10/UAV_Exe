@@ -3,6 +3,11 @@
 
 CFileHandler::CFileHandler() {}
 
+CFileHandler::CFileHandler(CFileHandler&& other) : fileStream(std::move(other.fileStream)) {
+    // Properly move the fileStream
+}
+
+
 CFileHandler::~CFileHandler() {
     closeHandler();
 }

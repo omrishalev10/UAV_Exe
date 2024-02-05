@@ -6,6 +6,7 @@
 #include "CUav.h"
 #include <set>
 #include <list>
+#include <unordered_map>
 
 using namespace std;
 
@@ -14,11 +15,14 @@ private:
     CommandsSet commands = {};
     list<CUav> uavs = {};
     ParsedData simulationParams;
+    unordered_map<int, unique_ptr<CFileHandler>> fileHandlers; // Maps UAV number to its file handler with unique pointer
+
 
 public:
-    SimulationManager();  // Constructor to initialize simulation parameters
+    SimulationManager();  
     void init(const CommandsSet& cmds, const ParsedData& params);
-    void runSimulation();     // Method to run the simulation
+    void runSimulation();     
+    ~SimulationManager(); 
 };
 
 #endif 
