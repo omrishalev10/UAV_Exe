@@ -61,7 +61,6 @@ void CheckSimCmds(CommandsSet& cmds)
             << ", X: " << cmd.x
             << ", Y: " << cmd.y << endl;
     }
-    cout << endl;
 }
 
 

@@ -13,9 +13,9 @@ void SimulationManager::init(const CommandsSet& cmds, const ParsedData& params) 
 
     // Initialize UAVs based on ParsedData
     for (int i = 0; i < params.m_number; ++i) {
-        UavParams uavParams{ i+1, params.m_radius, params.m_x0, params.m_y0, params.m_z0, params.m_speed0, params.m_azimuth };
+        UavParams uavParams{ i + 1, params.m_radius, params.m_x0, params.m_y0, params.m_z0, params.m_speed0, params.m_azimuth };
         CUav uav;
-        uav.initialize(uavParams); 
+        uav.initialize(uavParams);
         uavs.push_back(uav);
     }
 }

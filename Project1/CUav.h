@@ -19,7 +19,14 @@ struct UavParams {
     double azimuth;
 };
 
-class CUav : public IUav<UavParams>{
+class CUav : public IUav<UavParams> {
+public:
+
+    CUav();
+    virtual void initialize(const UavParams& params);
+    virtual void executeCommand(const Command& cmd) override;
+    virtual void update(double deltaTime) override;
+
 private:
     int uavNumber;
     double x, y, z; // Current position
@@ -28,20 +35,13 @@ private:
     double turningRadius;
     pair<double, double> destination;
     bool isCircling;
+    bool GotCommand; // flag to sign when got new command to calculate new azimuth
 
-    double calculateAzimuthTowards(double fromX, double fromY, double toX, double toY);
-    void adjustAzimuthTowardsDestination();
+
     void moveUAV(double deltaTime);
-    void checkAndInitiateCircling();
-    void circleAroundDestination();
+    void calculateAzimuth();
 
 public:
-
-    CUav();
-    virtual void initialize(const UavParams& params); 
-    virtual void update(double deltaTime) override;
-    virtual void executeCommand(const Command& cmd) override;
-
     /* Getters */
     int getUavNumber() { return uavNumber; }
     double getX() { return x; }
