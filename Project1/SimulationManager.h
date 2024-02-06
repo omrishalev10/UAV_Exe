@@ -4,25 +4,20 @@
 #include "CFileHandler.h"
 #include "SimParser.h"
 #include "CUav.h"
-#include <set>
 #include <list>
 #include <unordered_map>
 
-using namespace std;
-
 class SimulationManager {
-private:
-    CommandsMap commands = {};
-    list<CUav> uavs = {};
-    ParsedData simulationParams;
-    unordered_map<int, unique_ptr<CFileHandler>> fileHandlers; // Maps UAV number to its file handler with unique pointer
-    static double currentTime; // Start of simulation time
-
 public:
-    SimulationManager();  
     void init(const CommandsMap& cmds, const ParsedData& params);
-    void runSimulation();     
-    ~SimulationManager(); 
+    void runSimulation();  
+
+private:
+    CommandsMap m_commands = {};
+    std::list<CUav> m_uavs = {};
+    ParsedData m_simulationParams;
+    std::unordered_map<int, std::unique_ptr<CFileHandler>> m_fileHandlers; // Maps UAV number to its file handler with unique pointer
+    static double m_currentTime; // Start of simulation time
 };
 
 #endif 

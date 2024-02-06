@@ -4,10 +4,9 @@
 #include <string>
 #include <map>
 
-using namespace std;
-
 // Struct for parsed data from SimParams.ini
-struct ParsedData {
+struct ParsedData 
+{
     double m_Dt;
     int m_number;
     double m_radius;
@@ -20,27 +19,31 @@ struct ParsedData {
 };
 
 // Struct for individual command
-struct Command {
-    double time;
-    int uavNumber;
-    double x;
-    double y;
+struct Command 
+{
+    double m_time;
+    int m_uavNumber;
+    double m_x;
+    double m_y;
 
     // Define the operator < for sorting by time within the set
-    bool operator<(const Command& other) const {
-        return time < other.time;
+    bool operator<(const Command& other) const 
+    {
+        return m_time < other.m_time;
     }
 };
 
 // Struct to hold a set of commands
-struct CommandsMap {
-    multimap<double, Command> commands;
+struct CommandsMap 
+{
+    std::multimap<double, Command> m_commands;
 };
 
-class SimParser {
+class SimParser 
+{
 public:
-    static bool readSimParams(const string& filename, ParsedData& data);
-    static bool readSimCmds(const string& filename, CommandsMap& cmds);
+    static bool readSimParams(const std::string& filename, ParsedData& data);
+    static bool readSimCmds(const std::string& filename, CommandsMap& cmds);
 };
 
 #endif 

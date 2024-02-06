@@ -1,2 +1,5 @@
-﻿  SimulationManager.cpp
+﻿  Main.cpp
+  SimParser.cpp
+  SimulationManager.cpp
+  Generating Code...
   Project1.vcxproj -> C:\Users\omris\source\repos\UavSimulationManager\x64\Debug\Project1.exe

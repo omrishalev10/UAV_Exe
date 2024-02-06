@@ -5,60 +5,59 @@
 #include <utility>
 #include <cmath>
 
-using namespace std;
-static const double PI = 2 * acos(0.0);
+static const double glb_PI = 2 * acos(0.0);
 
 // UavParams Struct for UAV-specific parameters
-struct UavParams {
-    int uavNumber;
-    double radius;
-    double x0;
-    double y0;
-    double z0;
-    double speed0;
-    double azimuth;
+struct UavParams 
+{
+    int m_uavNumber;
+    double m_radius;
+    double m_x0;
+    double m_y0;
+    double m_z0;
+    double m_velocity0;
+    double m_azimuth;
+};
+
+struct UavLocation
+{
+    double m_x;
+    double m_y;
+    double m_z;
 };
 
 class CUav : public IUav<UavParams> {
 public:
-
     CUav();
     virtual void initialize(const UavParams& params);
     virtual void executeCommand(const Command& cmd) override;
     virtual void update(double deltaTime) override;
 
-
 private:
-    int uavNumber;
-    double x, y, z; // Current position
-    double speed;   // Current speed
-    double azimuth; // Current azimuth
-    double turningRadius;
-
-    pair<double, double> destination;
-    bool destinationSet;
-    
-    bool gotNewCommand; // flag to sign when got new command to calculate new azimuth
-    bool isFirstCommand;
-    
-    double speedX, speedY; // Axis speed 
-
-    double theta = 0; // Used for circling movement
-
     void moveUAV(double deltaTime);
     void calculateAzimuth();
     void calculateSpeedByAxis();
-
     bool distanceToTarget();
-    
     void moveUavInCircle(double deltaTime);
+
+    int m_uavNumber;
+    UavLocation m_currentLocation; // Current position
+    double m_velocity;   // Current velocity
+    double m_azimuth; // Current azimuth
+    double m_turningRadius;
+    UavLocation m_destination; // Destination that got from a command
+    bool m_isFirstCommand;  // Flag to sign when got THE FIRST command 
+    bool m_isNewCommand; // Flag to sign when got new command
+    double m_velocityX; // X Axis speed
+    double m_velocityY; // Y Axis speed 
+    double m_theta = 0; // Used for circling movement
 
 public:
     /* Getters */
-    int getUavNumber() { return uavNumber; }
-    double getX() { return x; }
-    double getY() { return y; }
-    double getAzimuth() { return azimuth; }
+    int getUavNumber() { return m_uavNumber; }
+    double getX() { return m_currentLocation.m_x; }
+    double getY() { return m_currentLocation.m_y; }
+    double getAzimuth() { return m_azimuth; }
 };
 
 #endif 

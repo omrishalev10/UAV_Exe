@@ -3,30 +3,23 @@
 
 CFileHandler::CFileHandler() {}
 
-CFileHandler::CFileHandler(CFileHandler&& other) : fileStream(std::move(other.fileStream)) {
-    // Properly move the fileStream
-}
-
-
-CFileHandler::~CFileHandler() {
-    closeHandler();
-}
+CFileHandler::CFileHandler(CFileHandler&& other) : m_fileStream(std::move(other.m_fileStream)) {}
 
 /* Open a file with the given name */
-bool CFileHandler::initHandler(const string& fileName) {
-    fileStream.open(fileName, ios::out);
-    return fileStream.is_open();
+bool CFileHandler::initHandler(const std::string& fileName) {
+    m_fileStream.open(fileName, std::ios::out);
+    return m_fileStream.is_open();
 }
 
 /* Write to the file the given data */
-bool CFileHandler::writeHandler(const string& data) {
-    if (!fileStream.is_open()) {
-        cerr << "Error: File is not open for writing." << endl;
+bool CFileHandler::writeHandler(const std::string& data) {
+    if (!m_fileStream.is_open()) {
+        std::cerr << "Error: File is not open for writing." << std::endl;
         return false;
     }
-    fileStream << data << endl;
-    if (fileStream.fail()) {
-        cerr << "Error: Write operation failed." << endl;
+    m_fileStream << data << std::endl;
+    if (m_fileStream.fail()) {
+        std::cerr << "Error: Write operation failed." << std::endl;
         return false;
     }
     return true;
@@ -34,8 +27,8 @@ bool CFileHandler::writeHandler(const string& data) {
 
 /* If file is open - close it*/
 bool CFileHandler::closeHandler() {
-    if (fileStream.is_open()) {
-        fileStream.close();
+    if (m_fileStream.is_open()) {
+        m_fileStream.close();
     }
-    return !fileStream.is_open();
+    return !m_fileStream.is_open();
 }

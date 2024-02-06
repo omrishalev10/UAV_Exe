@@ -4,19 +4,19 @@
 #include <vector>
 #include <iostream>
 
-using namespace std;
-
-bool SimParser::readSimParams(const string& filename, ParsedData& data)
+bool SimParser::readSimParams(const std::string& filename, ParsedData& data)
 {
-    ifstream file(filename);
+    std::ifstream file(filename);
     if (!file.is_open()) return false;
 
-    string line;
-    while (getline(file, line)) {
-        istringstream iss(line);
-        string key;
+    std::string line;
+    while (getline(file, line))
+    {
+        std::istringstream iss(line);
+        std::string key;
         char eq;
-        if (iss >> key >> eq) {
+        if (iss >> key >> eq) 
+        {
             if (key == "Dt") iss >> data.m_Dt;
             else if (key == "N_uav") iss >> data.m_number;
             else if (key == "R") iss >> data.m_radius;
@@ -33,19 +33,19 @@ bool SimParser::readSimParams(const string& filename, ParsedData& data)
     return true;
 }
 
-bool SimParser::readSimCmds(const string& filename, CommandsMap& cmds) {
-    ifstream file(filename);
-    if (!file.is_open()) return false;
-
-    int counter = 0;
-    Command cmd;
-    while (file >> cmd.time >> cmd.uavNumber >> cmd.x >> cmd.y) {
-        // Insert command into multimap with time as the key
-        cmds.commands.insert(make_pair(cmd.time, cmd));
-        counter++;
+bool SimParser::readSimCmds(const std::string& filename, CommandsMap& cmds)
+{
+    std::ifstream file(filename);
+    if (!file.is_open()) 
+    {
+        return false;
     }
-
+    Command cmd = { 0 };
+    while (file >> cmd.m_time >> cmd.m_uavNumber >> cmd.m_x >> cmd.m_y)
+    {
+        // Insert command into multimap with time as the key
+        cmds.m_commands.insert(std::make_pair(cmd.m_time, cmd));
+    }
     file.close();
     return true;
 }
-

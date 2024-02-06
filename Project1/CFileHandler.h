@@ -7,19 +7,17 @@
 #include <fstream>
 #include <string>
 
-using namespace std;
 
-class CFileHandler : public IWriteDataHandler<string> {
+class CFileHandler : public IWriteDataHandler {
 private:
-    ofstream fileStream;
+    std::ofstream m_fileStream;
 
 public:
     CFileHandler();
     CFileHandler(CFileHandler&& other);
-    virtual ~CFileHandler();
 
-    virtual bool initHandler(const string& fileName) override;
-    virtual bool writeHandler(const string& data) override;
+    virtual bool initHandler(const std::string& fileName) override;
+    virtual bool writeHandler(const std::string& data) override;
     virtual bool closeHandler() override;
 };
 
