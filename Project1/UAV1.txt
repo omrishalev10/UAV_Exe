@@ -4,39 +4,39 @@ Time: 1.00, UAV: 1, X: 0.71, Y: 0.71, Azimuth: 45.00
 
 Time: 2.00, UAV: 1, X: 1.41, Y: 1.41, Azimuth: 45.00
 
-Time: 3.00, UAV: 1, X: 3.54, Y: 3.84, Azimuth: 237.30
+Time: 3.00, UAV: 1, X: 2.12, Y: 2.12, Azimuth: 45.00
 
-Time: 4.00, UAV: 1, X: 2.58, Y: 3.91, Azimuth: 294.59
+Time: 4.00, UAV: 1, X: 3.54, Y: 3.84, Azimuth: 237.30
 
-Time: 5.00, UAV: 1, X: 2.01, Y: 3.14, Azimuth: 351.89
+Time: 5.00, UAV: 1, X: 2.58, Y: 3.91, Azimuth: 294.59
 
-Time: 6.00, UAV: 1, X: 2.35, Y: 2.24, Azimuth: 49.18
+Time: 6.00, UAV: 1, X: 2.01, Y: 3.14, Azimuth: 351.89
 
-Time: 7.00, UAV: 1, X: 3.28, Y: 2.04, Azimuth: 106.48
+Time: 7.00, UAV: 1, X: 2.35, Y: 2.24, Azimuth: 49.18
 
-Time: 8.00, UAV: 1, X: 3.96, Y: 2.72, Azimuth: 163.77
+Time: 8.00, UAV: 1, X: 3.28, Y: 2.04, Azimuth: 106.48
 
-Time: 9.00, UAV: 1, X: 3.75, Y: 3.66, Azimuth: 221.07
+Time: 9.00, UAV: 1, X: 3.96, Y: 2.72, Azimuth: 163.77
 
-Time: 10.00, UAV: 1, X: 2.85, Y: 3.99, Azimuth: 278.37
+Time: 10.00, UAV: 1, X: 3.75, Y: 3.66, Azimuth: 221.07
 
-Time: 11.00, UAV: 1, X: 2.09, Y: 3.41, Azimuth: 335.66
+Time: 11.00, UAV: 1, X: 2.85, Y: 3.99, Azimuth: 278.37
 
-Time: 12.00, UAV: 1, X: 2.16, Y: 2.46, Azimuth: 32.96
+Time: 12.00, UAV: 1, X: 2.09, Y: 3.41, Azimuth: 335.66
 
-Time: 13.00, UAV: 1, X: 3.00, Y: 2.00, Azimuth: 90.25
+Time: 13.00, UAV: 1, X: 2.16, Y: 2.46, Azimuth: 32.96
 
-Time: 14.00, UAV: 1, X: 3.84, Y: 2.46, Azimuth: 147.55
+Time: 14.00, UAV: 1, X: 3.00, Y: 2.00, Azimuth: 90.25
 
-Time: 15.00, UAV: 1, X: 3.91, Y: 3.42, Azimuth: 204.85
+Time: 15.00, UAV: 1, X: 3.84, Y: 2.46, Azimuth: 147.55
 
-Time: 16.00, UAV: 1, X: 3.14, Y: 3.99, Azimuth: 262.14
+Time: 16.00, UAV: 1, X: 3.91, Y: 3.42, Azimuth: 204.85
 
-Time: 17.00, UAV: 1, X: 2.24, Y: 3.65, Azimuth: 319.44
+Time: 17.00, UAV: 1, X: 3.14, Y: 3.99, Azimuth: 262.14
 
-Time: 18.00, UAV: 1, X: 2.04, Y: 2.71, Azimuth: 16.73
+Time: 18.00, UAV: 1, X: 2.24, Y: 3.65, Azimuth: 319.44
 
-Time: 19.00, UAV: 1, X: 2.72, Y: 2.04, Azimuth: 74.03
+Time: 19.00, UAV: 1, X: 2.04, Y: 2.71, Azimuth: 16.73
 
-Time: 20.00, UAV: 1, X: 3.66, Y: 2.25, Azimuth: 131.32
+Time: 20.00, UAV: 1, X: 2.72, Y: 2.04, Azimuth: 74.03
 
