@@ -1,3 +1,3 @@
 void CheckSimParams(ParsedData& data);
 
-void CheckSimCmds(CommandsSet& cmds);
+void CheckSimCmds(CommandsMap& cmds);

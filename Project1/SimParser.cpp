@@ -2,6 +2,9 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <iostream>
+
+using namespace std;
 
 bool SimParser::readSimParams(const string& filename, ParsedData& data)
 {
@@ -25,19 +28,24 @@ bool SimParser::readSimParams(const string& filename, ParsedData& data)
             else if (key == "TimeLim") iss >> data.m_timeLim;
         }
     }
+    
     file.close();
     return true;
 }
 
-bool SimParser::readSimCmds(const string& filename, CommandsSet& cmds)
-{
+bool SimParser::readSimCmds(const string& filename, CommandsMap& cmds) {
     ifstream file(filename);
     if (!file.is_open()) return false;
 
+    int counter = 0;
     Command cmd;
     while (file >> cmd.time >> cmd.uavNumber >> cmd.x >> cmd.y) {
-        cmds.commands.insert(cmd);
+        // Insert command into multimap with time as the key
+        cmds.commands.insert(make_pair(cmd.time, cmd));
+        counter++;
     }
+
     file.close();
     return true;
 }
+

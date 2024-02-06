@@ -7,7 +7,7 @@ double SimulationManager::currentTime = 0.0;
 
 SimulationManager::SimulationManager() {}
 
-void SimulationManager::init(const CommandsSet& cmds, const ParsedData& params) {
+void SimulationManager::init(const CommandsMap& cmds, const ParsedData& params) {
     this->commands = cmds;
     this->simulationParams = params;
 
@@ -63,13 +63,13 @@ void SimulationManager::runSimulation()
             fileHandlers[uav.getUavNumber()]->writeHandler(data.str());
         }
         // Execute commands scheduled for the current time or earlier
-        while (nextCmdIt != commands.commands.end() && nextCmdIt->time <= currentTime) 
+        while (nextCmdIt != commands.commands.end() && nextCmdIt->first <= currentTime) 
         {
             for (auto& uav : uavs) 
             {
-                if (uav.getUavNumber() == nextCmdIt->uavNumber) 
+                if (uav.getUavNumber() == nextCmdIt->second.uavNumber) 
                 {
-                    uav.executeCommand(*nextCmdIt);
+                    uav.executeCommand(nextCmdIt->second);
                 }
             }
             ++nextCmdIt; // Move to the next command

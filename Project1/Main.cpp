@@ -7,7 +7,7 @@ using namespace std;
 
 int main() {
     ParsedData data;
-    CommandsSet cmds;
+    CommandsMap cmds;
 
     // Assuming the files are named "SimParams.ini" and "SimCmds.txt"
     string simParams = "SimParams.ini";
@@ -41,6 +41,7 @@ void CheckSimParams(ParsedData& data)
     // Print the simulation parameters
     cout << "Simulation Parameters:" << endl;
     cout << "Dt: " << data.m_Dt << endl;
+    cout << "N_uav: " << data.m_number << endl;
     cout << "Radius: " << data.m_radius << endl;
     cout << "X0: " << data.m_x0 << endl;
     cout << "Y0: " << data.m_y0 << endl;
@@ -51,16 +52,17 @@ void CheckSimParams(ParsedData& data)
     cout << endl; // Add an extra line for better readability
 }
 
-void CheckSimCmds(CommandsSet& cmds)
+void CheckSimCmds(CommandsMap& cmds)
 {
     // Print the commands
     cout << "Commands:" << endl;
     for (const auto& cmd : cmds.commands) {
-        cout << "Time: " << cmd.time
-            << ", UAV Number: " << cmd.uavNumber
-            << ", X: " << cmd.x
-            << ", Y: " << cmd.y << endl;
+        cout << "Time: " << cmd.first
+            << ", UAV Number: " << cmd.second.uavNumber
+            << ", X: " << cmd.second.x
+            << ", Y: " << cmd.second.y << endl;
     }
+
 }
 
 

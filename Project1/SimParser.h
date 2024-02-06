@@ -2,7 +2,7 @@
 #define SIMPARSER_H
 
 #include <string>
-#include <set>
+#include <map>
 
 using namespace std;
 
@@ -33,14 +33,14 @@ struct Command {
 };
 
 // Struct to hold a set of commands
-struct CommandsSet {
-    set<Command> commands;
+struct CommandsMap {
+    multimap<double, Command> commands;
 };
 
 class SimParser {
 public:
     static bool readSimParams(const string& filename, ParsedData& data);
-    static bool readSimCmds(const string& filename, CommandsSet& cmds);
+    static bool readSimCmds(const string& filename, CommandsMap& cmds);
 };
 
 #endif 

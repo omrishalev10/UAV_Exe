@@ -12,7 +12,7 @@ using namespace std;
 
 class SimulationManager {
 private:
-    CommandsSet commands = {};
+    CommandsMap commands = {};
     list<CUav> uavs = {};
     ParsedData simulationParams;
     unordered_map<int, unique_ptr<CFileHandler>> fileHandlers; // Maps UAV number to its file handler with unique pointer
@@ -20,7 +20,7 @@ private:
 
 public:
     SimulationManager();  
-    void init(const CommandsSet& cmds, const ParsedData& params);
+    void init(const CommandsMap& cmds, const ParsedData& params);
     void runSimulation();     
     ~SimulationManager(); 
 };
