@@ -15,54 +15,50 @@ void CUav::initialize(const UavParams& params)
     this->m_currentLocation.m_z = params.m_z0;  
     this->m_velocity = params.m_velocity0;
     this->m_azimuth = params.m_azimuth;
+
+    calculateSpeedByAxis();
+
 }
 
-void CUav::executeCommand(const Command& cmd) 
-{
-    /* Make sure we are working with the correct UAV */
-    if (cmd.m_uavNumber == m_uavNumber) 
-    {
-        /* Set new destination */
-        m_destination.m_x = cmd.m_x;
-        m_destination.m_y = cmd.m_y;         
-        if (!m_isNewCommand) 
-        { 
-            m_isNewCommand = true;
-        }
+void CUav::executeCommand(const Command& cmd) {
+    if (cmd.m_uavNumber == m_uavNumber) {
+        m_destination = { cmd.m_x, cmd.m_y };
+        m_isNewCommand = true; 
     }
 }
 
-void CUav::update(double deltaTime) 
-{
-    /* Calculate new azimuth only if there was a new command */
-    if (m_isNewCommand) 
-    {
-        if (isCircling)
-        {
-            isCircling = false;
+void CUav::update(double deltaTime) {
+    // If it's the first update cycle or there's a new command, recalculate azimuth and speeds
+    if (!m_isFirstCommand || m_isNewCommand) {
+        if (m_isNewCommand) {
+            calculateAzimuth();
+            m_isNewCommand = false;
+            m_isFirstCommand = true; // Acknowledge that we're now moving towards a target
         }
-        calculateAzimuth();
-        m_isNewCommand = false;
-        m_isFirstCommand = true;
+        calculateSpeedByAxis(); // This should be calculated initially and upon receiving new commands
     }
+
     moveUAV(deltaTime);
-}
 
-void CUav::moveUAV(double deltaTime) 
-{ 
-    // Before the first command uav cant circling.
-    if (!m_isFirstCommand) 
-    {
-        calculateSpeedByAxis();
-        m_currentLocation.m_x += m_velocityX * deltaTime;
-        m_currentLocation.m_y += m_velocityY * deltaTime;
-    }
-    else 
-    {
+    // Check for circling initiation only if there's a destination to circle around
+    if (m_isFirstCommand && !isCircling && distanceToTarget()) {
         isCircling = true;
+    }
+
+    if (isCircling) {
         moveUavInCircle(deltaTime);
     }
 }
+
+
+
+
+void CUav::moveUAV(double deltaTime) {
+    calculateSpeedByAxis();
+    m_currentLocation.m_x += m_velocityX * deltaTime;
+    m_currentLocation.m_y += m_velocityY * deltaTime;
+}
+
 
 void CUav::calculateAzimuth() 
 {
@@ -85,7 +81,7 @@ void CUav::calculateSpeedByAxis()
 bool CUav::distanceToTarget() 
 {
     double distanceToTarget = sqrt(pow(m_destination.m_y - m_currentLocation.m_y, 2) + pow(m_destination.m_x - m_currentLocation.m_x, 2));
-    return distanceToTarget <= m_turningRadius ? true : false;
+    return distanceToTarget <= m_turningRadius;
 }
 
 void CUav::moveUavInCircle(double deltaTime) 
