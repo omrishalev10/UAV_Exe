@@ -14,7 +14,7 @@ private:
 
 public:
     CFileHandler();
-    CFileHandler(CFileHandler&& other);
+    //CFileHandler(CFileHandler&& other);
 
     virtual bool initHandler(const std::string& fileName) override;
     virtual bool writeHandler(const std::string& data) override;

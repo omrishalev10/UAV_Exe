@@ -19,5 +19,4 @@ private:
     std::unordered_map<int, std::unique_ptr<CFileHandler>> m_fileHandlers; // Maps UAV number to its file handler with unique pointer
     static double m_currentTime; // Start of simulation time
 };
-
 #endif 

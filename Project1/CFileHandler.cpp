@@ -3,7 +3,7 @@
 
 CFileHandler::CFileHandler() {}
 
-CFileHandler::CFileHandler(CFileHandler&& other) : m_fileStream(std::move(other.m_fileStream)) {}
+//CFileHandler::CFileHandler(CFileHandler&& other) : m_fileStream(std::move(other.m_fileStream)) {}
 
 /* Open a file with the given name */
 bool CFileHandler::initHandler(const std::string& fileName) {

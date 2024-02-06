@@ -17,10 +17,10 @@ void SimulationManager::init(const CommandsMap& cmds, const ParsedData& params) 
         uav.initialize(uavParams);
         m_uavs.push_back(uav);
 
-        /* Create a file for each UAV */
+        /* Create a file for each UAV with unique pointer */
         std::ostringstream fileName;
         fileName << "UAV" << i + 1 << ".txt";
-        auto handler = std::make_unique<CFileHandler>(); // Create a unique_ptr to CFileHandler
+        auto handler = std::make_unique<CFileHandler>(); // Create a unique_ptr to CFileHandler 
         if (!handler->initHandler(fileName.str())) 
         {
             std::cerr << "Failed to initialize file handler for UAV" << (i + 1) << std::endl;

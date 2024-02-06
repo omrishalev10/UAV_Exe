@@ -4,7 +4,7 @@
 #include <iomanip> // setprecision function
 
 CUav::CUav() : m_currentLocation({ 0.0, 0.0, 0.0 }), m_velocity(0), m_azimuth(0), m_uavNumber(0), m_turningRadius(0), m_destination({ 0.0, 0.0 }),
-m_isNewCommand(false), m_isFirstCommand(false), m_velocityX(0), m_velocityY(0) {}
+m_isNewCommand(false), m_isFirstCommand(false), isCircling(false), m_velocityX(0), m_velocityY(0) {}
 
 void CUav::initialize(const UavParams& params) 
 {
@@ -37,21 +37,23 @@ void CUav::update(double deltaTime)
     /* Calculate new azimuth only if there was a new command */
     if (m_isNewCommand) 
     {
+        if (isCircling)
+        {
+            isCircling = false;
+        }
         calculateAzimuth();
         m_isNewCommand = false;
         m_isFirstCommand = true;
-    }
-    if (m_isFirstCommand) 
-    {
-        distanceToTarget();
     }
     moveUAV(deltaTime);
 }
 
 void CUav::moveUAV(double deltaTime) 
 { 
-    if (m_isFirstCommand)
+    // Before the first command uav cant circling.
+    if (m_isFirstCommand && distanceToTarget())
     {
+        isCircling = true;
         moveUavInCircle(deltaTime);
     }
     else 
@@ -88,6 +90,7 @@ bool CUav::distanceToTarget()
 
 void CUav::moveUavInCircle(double deltaTime) 
 {
+    // Calculate the angular speed and the angle of the movement    
     double angularSpeed = m_velocity / m_turningRadius;
     m_theta += angularSpeed * deltaTime;
     

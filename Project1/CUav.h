@@ -48,6 +48,7 @@ private:
     UavLocation m_destination; // Destination that got from a command
     bool m_isFirstCommand;  // Flag to sign when got THE FIRST command 
     bool m_isNewCommand; // Flag to sign when got new command
+    bool isCircling; // Flag to sign when circling
     double m_velocityX; // X Axis speed
     double m_velocityY; // Y Axis speed 
     double m_theta = 0; // Used for circling movement

@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import re
-import configparser
+import mplcursors
+import numpy as np  # For ensuring index is an integer
 
 
 def read_sim_params(ini_file_path):
@@ -10,7 +11,6 @@ def read_sim_params(ini_file_path):
         for line in file:
             if line.startswith('N_uav = '):
                 _, n_uav_value = line.split(" = ")
-                print(n_uav_value)
                 n_uav = int(n_uav_value)
                 break  # Stop reading once N_uav is found
     return n_uav
@@ -39,11 +39,11 @@ def plot_uav_paths(base_path, n_uav):
         file_path = f"{base_path}/UAV{i}.txt"
         data = read_uav_data(file_path)
         times, xs, ys = zip(*data)
-        plt.plot(xs, ys, marker='o', label=f'UAV{i}')
+        line, = plt.plot(xs, ys, marker='o', linestyle='-', label=f'UAV{i}')
 
-        # Annotate each point with its time
-        for time, x, y in data:
-            plt.annotate(f'{time}s', (x, y), textcoords="offset points", xytext=(0, 10), ha='center')
+        # Ensure mplcursors uses an integer index
+        cursor = mplcursors.cursor(line, hover=True)
+        cursor.connect("add", lambda sel: sel.annotation.set_text(f"Time: {data[int(sel.index)][0]}s"))
 
     plt.xlabel('X Coordinate')
     plt.ylabel('Y Coordinate')
@@ -54,7 +54,7 @@ def plot_uav_paths(base_path, n_uav):
 
 
 # Example usage
-ini_file_path = 'Project1\SimParams.ini'  # Adjust the path as necessary
+ini_file_path = 'Project1/SimParams.ini'  # Adjust the path as necessary
 base_path = 'Project1'  # The directory where UAV files are stored
 n_uav = read_sim_params(ini_file_path)
 plot_uav_paths(base_path, n_uav)
