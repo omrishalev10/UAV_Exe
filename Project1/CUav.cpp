@@ -51,16 +51,16 @@ void CUav::update(double deltaTime)
 void CUav::moveUAV(double deltaTime) 
 { 
     // Before the first command uav cant circling.
-    if (m_isFirstCommand && distanceToTarget())
-    {
-        isCircling = true;
-        moveUavInCircle(deltaTime);
-    }
-    else 
+    if (!m_isFirstCommand) 
     {
         calculateSpeedByAxis();
         m_currentLocation.m_x += m_velocityX * deltaTime;
         m_currentLocation.m_y += m_velocityY * deltaTime;
+    }
+    else 
+    {
+        isCircling = true;
+        moveUavInCircle(deltaTime);
     }
 }
 
@@ -85,7 +85,7 @@ void CUav::calculateSpeedByAxis()
 bool CUav::distanceToTarget() 
 {
     double distanceToTarget = sqrt(pow(m_destination.m_y - m_currentLocation.m_y, 2) + pow(m_destination.m_x - m_currentLocation.m_x, 2));
-    return distanceToTarget <= m_turningRadius;
+    return distanceToTarget <= m_turningRadius ? true : false;
 }
 
 void CUav::moveUavInCircle(double deltaTime) 
