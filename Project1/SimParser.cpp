@@ -12,7 +12,8 @@ bool SimParser::readSimParams(const string& filename, ParsedData& data)
     while (getline(file, line)) {
         istringstream iss(line);
         string key;
-        if (iss >> key) {
+        char eq;
+        if (iss >> key >> eq) {
             if (key == "Dt") iss >> data.m_Dt;
             else if (key == "N_uav") iss >> data.m_number;
             else if (key == "R") iss >> data.m_radius;

@@ -3,6 +3,8 @@
 #include <sstream>
 #include <iomanip> // setprecision function
 
+double SimulationManager::currentTime = 0.0;
+
 SimulationManager::SimulationManager() {}
 
 void SimulationManager::init(const CommandsSet& cmds, const ParsedData& params) {
@@ -29,8 +31,6 @@ void SimulationManager::init(const CommandsSet& cmds, const ParsedData& params) 
 
 void SimulationManager::runSimulation() {
     const double Dt = simulationParams.m_Dt; // Time step interval
-    double currentTime = 0.0; // Start of simulation time
-
     auto nextCmdIt = commands.commands.begin(); // Iterator to the first command
 
     // Loop until the simulation time reaches the limit
@@ -46,20 +46,37 @@ void SimulationManager::runSimulation() {
         }
 
         // Update each UAV's state based on Dt
-        for (auto& uav : uavs) {
-            uav.update(Dt);
+        for (auto& uav : uavs) 
+        {
+            if (currentTime == 0.0)
+            {
+                uav.update(currentTime);
+            }
+            else
+            {
+                uav.update(Dt);
+            }
         }
-       
+
         for (auto& uav : uavs) {
             ostringstream data;
+            /* This is the initialize states of the uav */
+            /*if (currentTime == 0) {
+                data << fixed << setprecision(2)
+                    << "Time: " << currentTime << ", UAV: " << uav.getUavNumber()
+                    << ", X: " << simulationParams.m_x0 << ", Y: " << simulationParams.m_y0
+                    << ", Azimuth: " << simulationParams.m_azimuth << endl;
+            }*/
+            /* else {*/
             data << fixed << setprecision(2)
                 << "Time: " << currentTime << ", UAV: " << uav.getUavNumber()
                 << ", X: " << uav.getX() << ", Y: " << uav.getY()
                 << ", Azimuth: " << uav.getAzimuth() << endl;
-
+            //}
             // Write to the corresponding file
             fileHandlers[uav.getUavNumber()]->writeHandler(data.str());
         }
-        currentTime += Dt; // Advance simulation time by Dt
+
+        currentTime += Dt;
     }
 }

@@ -16,7 +16,7 @@ private:
     list<CUav> uavs = {};
     ParsedData simulationParams;
     unordered_map<int, unique_ptr<CFileHandler>> fileHandlers; // Maps UAV number to its file handler with unique pointer
-
+    static double currentTime; // Start of simulation time
 
 public:
     SimulationManager();  

@@ -8,8 +8,9 @@ def read_sim_params(ini_file_path):
     n_uav = 0
     with open(ini_file_path, 'r') as file:
         for line in file:
-            if line.startswith('N_uav'):
-                _, n_uav_value = line.split()
+            if line.startswith('N_uav = '):
+                _, n_uav_value = line.split(" = ")
+                print(n_uav_value)
                 n_uav = int(n_uav_value)
                 break  # Stop reading once N_uav is found
     return n_uav

@@ -34,17 +34,24 @@ private:
     double speed;   // Current speed
     double azimuth; // Current azimuth
     double turningRadius;
-    pair<double, double> destination;
 
-    bool gotFirstCommand; // flag to sign when got new command to calculate new azimuth
+    pair<double, double> destination;
+    bool destinationSet;
+    
     bool gotNewCommand; // flag to sign when got new command to calculate new azimuth
-    bool isCircling;
-    /* Axis speed */
-    double speedX, speedY;
+    bool isFirstCommand;
+    
+    double speedX, speedY; // Axis speed 
+
+    double theta = 0; // Used for circling movement
 
     void moveUAV(double deltaTime);
     void calculateAzimuth();
     void calculateSpeedByAxis();
+
+    bool distanceToTarget();
+    
+    void moveUavInCircle(double deltaTime);
 
 public:
     /* Getters */
