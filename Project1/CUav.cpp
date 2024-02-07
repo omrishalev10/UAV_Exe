@@ -3,64 +3,68 @@
 #include <sstream>
 #include <iomanip> // setprecision function
 
-CUav::CUav() : m_currentLocation({ 0.0, 0.0, 0.0 }), m_velocity(0), m_azimuth(0), m_uavNumber(0), m_turningRadius(0), m_destination({ 0.0, 0.0 }),
-m_isNewCommand(false), m_isFirstCommand(false), isCircling(false), m_velocityX(0), m_velocityY(0) {}
+CUav::CUav() : m_currentLocation({ 0.0, 0.0, 0.0 }), m_velocity(0), m_azimuth(0), m_uavNumber(0), m_turningRadius(0),
+        m_destination({ 0.0, 0.0 }), m_isNewCommand(false), m_isFirstCommand(false), isCircling(false), m_velocityX(0),
+        m_velocityY(0), m_theta(0), m_state(MovementState::MovingForward) {}
 
-void CUav::initialize(const UavParams& params) 
+void CUav::initialize(const UavParams& params)
 {
     this->m_uavNumber = params.m_uavNumber;
     this->m_turningRadius = params.m_radius;
     this->m_currentLocation.m_x = params.m_x0;
     this->m_currentLocation.m_y = params.m_y0;
-    this->m_currentLocation.m_z = params.m_z0;  
+    this->m_currentLocation.m_z = params.m_z0;
     this->m_velocity = params.m_velocity0;
     this->m_azimuth = params.m_azimuth;
 
     calculateSpeedByAxis();
-
 }
 
-void CUav::executeCommand(const Command& cmd) {
-    if (cmd.m_uavNumber == m_uavNumber) {
+void CUav::executeCommand(const Command& cmd) 
+{
+    if (cmd.m_uavNumber == m_uavNumber) 
+    {
         m_destination = { cmd.m_x, cmd.m_y };
-        m_isNewCommand = true; 
+        m_isNewCommand = true;
     }
 }
 
-void CUav::update(double deltaTime) {
-    // If it's the first update cycle or there's a new command, recalculate azimuth and speeds
-    if (!m_isFirstCommand || m_isNewCommand) {
-        if (m_isNewCommand) {
+void CUav::update(double deltaTime) 
+{
+    switch (m_state) 
+    {
+    case MovementState::MovingForward:
+        if (m_isNewCommand) 
+        {
             calculateAzimuth();
             m_isNewCommand = false;
-            m_isFirstCommand = true; // Acknowledge that we're now moving towards a target
+            m_isFirstCommand = true; 
+            calculateSpeedByAxis(); 
         }
-        calculateSpeedByAxis(); // This should be calculated initially and upon receiving new commands
-    }
+        moveUAV(deltaTime);
+        if (m_isFirstCommand && distanceToTarget()) 
+        {
+            m_state = MovementState::Circling; 
+        }
+        break;
 
-    moveUAV(deltaTime);
+    case MovementState::Circling:
+        moveUavInCircle(deltaTime); 
+        break;
 
-    // Check for circling initiation only if there's a destination to circle around
-    if (m_isFirstCommand && !isCircling && distanceToTarget()) {
-        isCircling = true;
-    }
-
-    if (isCircling) {
-        moveUavInCircle(deltaTime);
+    default:
+        break;
     }
 }
 
-
-
-
-void CUav::moveUAV(double deltaTime) {
+void CUav::moveUAV(double deltaTime) 
+{
     calculateSpeedByAxis();
     m_currentLocation.m_x += m_velocityX * deltaTime;
     m_currentLocation.m_y += m_velocityY * deltaTime;
 }
 
-
-void CUav::calculateAzimuth() 
+void CUav::calculateAzimuth()
 {
     /* Calculation of delta x and delta y */
     double deltaX = m_destination.m_x - m_currentLocation.m_x;
@@ -71,25 +75,25 @@ void CUav::calculateAzimuth()
     m_azimuth = fmod(m_azimuth + 360, 360);
 }
 
-void CUav::calculateSpeedByAxis() 
+void CUav::calculateSpeedByAxis()
 {
     /* Calculate speed by axis */
     m_velocityX = m_velocity * cos(m_azimuth * glb_PI / 180);
     m_velocityY = m_velocity * sin(m_azimuth * glb_PI / 180);
 }
 
-bool CUav::distanceToTarget() 
+bool CUav::distanceToTarget()
 {
     double distanceToTarget = sqrt(pow(m_destination.m_y - m_currentLocation.m_y, 2) + pow(m_destination.m_x - m_currentLocation.m_x, 2));
     return distanceToTarget <= m_turningRadius;
 }
 
-void CUav::moveUavInCircle(double deltaTime) 
+void CUav::moveUavInCircle(double deltaTime)
 {
     // Calculate the angular speed and the angle of the movement    
     double angularSpeed = m_velocity / m_turningRadius;
     m_theta += angularSpeed * deltaTime;
-    
+
     // Ensure theta is within valid range [0, 2*pi)
     m_theta = fmod(m_theta, 2 * glb_PI);
 

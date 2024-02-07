@@ -26,9 +26,8 @@ bool SimParser::readSimParams(const std::string& filename, ParsedData& data)
             else if (key == "V0") iss >> data.m_speed0;
             else if (key == "Az") iss >> data.m_azimuth;
             else if (key == "TimeLim") iss >> data.m_timeLim;
-        }
-    }
-    
+        }       
+    }    
     file.close();
     return true;
 }

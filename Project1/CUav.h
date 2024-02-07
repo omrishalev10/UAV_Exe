@@ -8,7 +8,7 @@
 static const double glb_PI = 2 * acos(0.0);
 
 // UavParams Struct for UAV-specific parameters
-struct UavParams 
+struct UavParams
 {
     int m_uavNumber;
     double m_radius;
@@ -24,6 +24,11 @@ struct UavLocation
     double m_x;
     double m_y;
     double m_z;
+};
+
+enum class MovementState {
+    MovingForward,
+    Circling
 };
 
 class CUav : public IUav<UavParams> {
@@ -51,7 +56,8 @@ private:
     bool isCircling; // Flag to sign when circling
     double m_velocityX; // X Axis speed
     double m_velocityY; // Y Axis speed 
-    double m_theta = 0; // Used for circling movement
+    double m_theta; // Used for circling movement
+    MovementState m_state;
 
 public:
     /* Getters */

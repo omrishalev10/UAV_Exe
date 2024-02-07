@@ -1,0 +1,122 @@
+Time: 0.00, UAV: 5, X: 10.00, Y: 20.00, Azimuth: 30.00
+
+Time: 1.00, UAV: 5, X: 20.83, Y: 26.25, Azimuth: 30.00
+
+Time: 2.00, UAV: 5, X: 31.65, Y: 32.50, Azimuth: 30.00
+
+Time: 3.00, UAV: 5, X: 42.48, Y: 38.75, Azimuth: 30.00
+
+Time: 4.00, UAV: 5, X: 53.30, Y: 45.00, Azimuth: 30.00
+
+Time: 5.00, UAV: 5, X: 64.13, Y: 51.25, Azimuth: 30.00
+
+Time: 6.00, UAV: 5, X: 74.95, Y: 57.50, Azimuth: 30.00
+
+Time: 7.00, UAV: 5, X: 85.78, Y: 63.75, Azimuth: 30.00
+
+Time: 8.00, UAV: 5, X: 96.60, Y: 70.00, Azimuth: 30.00
+
+Time: 9.00, UAV: 5, X: 107.43, Y: 76.25, Azimuth: 30.00
+
+Time: 10.00, UAV: 5, X: 118.25, Y: 82.50, Azimuth: 30.00
+
+Time: 11.00, UAV: 5, X: 129.08, Y: 88.75, Azimuth: 30.00
+
+Time: 12.00, UAV: 5, X: 139.90, Y: 95.00, Azimuth: 30.00
+
+Time: 13.00, UAV: 5, X: 150.73, Y: 101.25, Azimuth: 30.00
+
+Time: 14.00, UAV: 5, X: 144.80, Y: 90.24, Azimuth: 241.71
+
+Time: 15.00, UAV: 5, X: 138.88, Y: 79.24, Azimuth: 241.71
+
+Time: 16.00, UAV: 5, X: 132.95, Y: 68.23, Azimuth: 241.71
+
+Time: 17.00, UAV: 5, X: 127.03, Y: 57.22, Azimuth: 241.71
+
+Time: 18.00, UAV: 5, X: 121.10, Y: 46.22, Azimuth: 241.71
+
+Time: 19.00, UAV: 5, X: 115.18, Y: 35.21, Azimuth: 241.71
+
+Time: 20.00, UAV: 5, X: 109.25, Y: 24.20, Azimuth: 241.71
+
+Time: 21.00, UAV: 5, X: 103.33, Y: 13.20, Azimuth: 241.71
+
+Time: 22.00, UAV: 5, X: 97.40, Y: 2.19, Azimuth: 241.71
+
+Time: 23.00, UAV: 5, X: 91.48, Y: -8.82, Azimuth: 241.71
+
+Time: 24.00, UAV: 5, X: 85.55, Y: -19.82, Azimuth: 241.71
+
+Time: 25.00, UAV: 5, X: 79.63, Y: -30.83, Azimuth: 241.71
+
+Time: 26.00, UAV: 5, X: 90.54, Y: -33.16, Azimuth: 212.55
+
+Time: 27.00, UAV: 5, X: 81.26, Y: -25.04, Azimuth: 245.11
+
+Time: 28.00, UAV: 5, X: 69.07, Y: -23.20, Azimuth: 277.66
+
+Time: 29.00, UAV: 5, X: 57.79, Y: -28.20, Azimuth: 310.22
+
+Time: 30.00, UAV: 5, X: 50.99, Y: -38.48, Azimuth: 342.77
+
+Time: 31.00, UAV: 5, X: 50.78, Y: -50.82, Azimuth: 15.33
+
+Time: 32.00, UAV: 5, X: 57.25, Y: -61.32, Azimuth: 47.88
+
+Time: 33.00, UAV: 5, X: 68.34, Y: -66.69, Azimuth: 80.44
+
+Time: 34.00, UAV: 5, X: 80.59, Y: -65.25, Azimuth: 112.99
+
+Time: 35.00, UAV: 5, X: 90.14, Y: -57.45, Azimuth: 145.54
+
+Time: 36.00, UAV: 5, X: 93.99, Y: -45.73, Azimuth: 178.10
+
+Time: 37.00, UAV: 5, X: 90.93, Y: -33.78, Azimuth: 210.65
+
+Time: 38.00, UAV: 5, X: 81.92, Y: -25.36, Azimuth: 243.21
+
+Time: 39.00, UAV: 5, X: 69.79, Y: -23.11, Azimuth: 275.76
+
+Time: 40.00, UAV: 5, X: 58.36, Y: -27.74, Azimuth: 308.32
+
+Time: 41.00, UAV: 5, X: 51.21, Y: -37.79, Azimuth: 340.87
+
+Time: 42.00, UAV: 5, X: 50.60, Y: -50.11, Azimuth: 13.43
+
+Time: 43.00, UAV: 5, X: 56.71, Y: -60.82, Azimuth: 45.98
+
+Time: 44.00, UAV: 5, X: 67.63, Y: -66.56, Azimuth: 78.53
+
+Time: 45.00, UAV: 5, X: 79.92, Y: -65.53, Azimuth: 111.09
+
+Time: 46.00, UAV: 5, X: 89.72, Y: -58.04, Azimuth: 143.64
+
+Time: 47.00, UAV: 5, X: 93.95, Y: -46.46, Azimuth: 176.20
+
+Time: 48.00, UAV: 5, X: 91.29, Y: -34.42, Azimuth: 208.75
+
+Time: 49.00, UAV: 5, X: 82.56, Y: -25.70, Azimuth: 241.31
+
+Time: 50.00, UAV: 5, X: 70.52, Y: -23.05, Azimuth: 273.86
+
+Time: 51.00, UAV: 5, X: 58.94, Y: -27.30, Azimuth: 306.41
+
+Time: 52.00, UAV: 5, X: 51.47, Y: -37.10, Azimuth: 338.97
+
+Time: 53.00, UAV: 5, X: 50.44, Y: -49.40, Azimuth: 11.52
+
+Time: 54.00, UAV: 5, X: 56.20, Y: -60.30, Azimuth: 44.08
+
+Time: 55.00, UAV: 5, X: 66.91, Y: -66.40, Azimuth: 76.63
+
+Time: 56.00, UAV: 5, X: 79.23, Y: -65.78, Azimuth: 109.19
+
+Time: 57.00, UAV: 5, X: 89.27, Y: -58.62, Azimuth: 141.74
+
+Time: 58.00, UAV: 5, X: 93.89, Y: -47.19, Azimuth: 174.30
+
+Time: 59.00, UAV: 5, X: 91.63, Y: -35.06, Azimuth: 206.85
+
+Time: 60.00, UAV: 5, X: 83.20, Y: -26.06, Azimuth: 239.40
+
