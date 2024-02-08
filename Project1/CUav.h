@@ -28,7 +28,8 @@ struct UavLocation
 
 enum class MovementState {
     MovingForward,
-    Circling
+    Circling,
+    Turn
 };
 
 class CUav : public IUav<UavParams> {
@@ -42,6 +43,8 @@ private:
     void moveUAV(double deltaTime);
     void calculateAzimuth();
     void calculateSpeedByAxis();
+    void moveUavNewDirection(double deltaTime);
+
     bool distanceToTarget();
     void moveUavInCircle(double deltaTime);
 
